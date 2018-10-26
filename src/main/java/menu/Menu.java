@@ -5,6 +5,7 @@
  */
 package menu;
 
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.Terminal;
@@ -18,11 +19,13 @@ public class Menu {
     Terminal terminal;
     Screen screen;
     TextGraphics tg;
+    private int current;
     
     public Menu(Terminal m, Screen s, TextGraphics t){
         this.terminal = m;
         this.screen = s;
         this.tg = t;
+        this.current = 1;
     }
     
     public void show() throws IOException{
@@ -58,11 +61,11 @@ public class Menu {
         */
         screen.refresh();
         
-        screen.refresh();
-        terminal.readInput();//czeka na klawisz
-        screen.doResizeIfNecessary();
-        screen.clear();
-        screen.refresh();
+        //screen.refresh();
+        //terminal.readInput();//czeka na klawisz
+        //screen.doResizeIfNecessary();
+        //screen.clear();
+        //screen.refresh();
         
 //  ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
 //  ████╗ ████║██╔════╝████╗  ██║██║   ██║
@@ -71,5 +74,44 @@ public class Menu {
 //  ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
 //  ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ 
 //                                        
+    }
+    
+    public void first() throws IOException{
+        tg.setForegroundColor(TextColor.ANSI.BLACK);
+        tg.setBackgroundColor(TextColor.ANSI.YELLOW);
+        tg.putString(54, 16, "-->");
+        tg.putString(63, 16, "NEW GAME");
+        tg.putString(78, 16, "<--");
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(54, 18, "         SCOREBOARD        ");
+        tg.putString(54, 20, "         QUIT GAME         ");
+        screen.refresh();
+    }
+    
+    public void second() throws IOException{
+        tg.putString(54, 16, "         NEW GAME          ");
+        tg.setForegroundColor(TextColor.ANSI.BLACK);
+        tg.setBackgroundColor(TextColor.ANSI.YELLOW);
+        tg.putString(54, 18, "-->");
+        tg.putString(63, 18, "SCOREBOARD");
+        tg.putString(78, 18, "<--");
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(54, 20, "         QUIT GAME         ");
+        screen.refresh();
+    }
+    
+    public void third() throws IOException{
+        tg.putString(54, 16, "         NEW GAME          ");
+        tg.putString(54, 18, "         SCOREBOARD        ");
+        tg.setForegroundColor(TextColor.ANSI.BLACK);
+        tg.setBackgroundColor(TextColor.ANSI.YELLOW);
+        tg.putString(54, 20, "-->");
+        tg.putString(63, 20, "QUIT GAME");
+        tg.putString(78, 20, "<--");
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        screen.refresh();
     }
 }

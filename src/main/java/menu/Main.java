@@ -36,7 +36,9 @@ public class Main {
         
         Menu menu1 = new Menu(terminal, screen, tg);
         menu1.show();
-
+        menu1.first();
+        int choice = 0;
+        
         boolean running = true;
         StringBuilder sb = new StringBuilder();
         
@@ -45,14 +47,83 @@ public class Main {
             screen.doResizeIfNecessary();
             KeyStroke keyPressed = terminal.pollInput();
             
+            switch (choice) {
+                case 0:
+                    menu1.first();
+                    break;
+                case 1:
+                    menu1.second();
+                    break;
+                default:
+                    menu1.third();
+                    break;
+            }
+                    
+            if(choice>3000)
+                    choice-=2700;
+            
             if(keyPressed != null){
                 System.out.println(keyPressed);
                 switch(keyPressed.getKeyType()){
                     case Escape:
                         running = false;
                         break;
+                    case ArrowDown:
+                        choice = (choice + 1) % 3;
+                        break;
+                    case ArrowUp:
+                        choice = (choice + 2) % 3;
+                        break;
+                    case Enter:
+                        switch (choice%3) {
+                            case 0:
+                                break;
+                            case 1:
+                                break;
+                            default:
+                                running = false;
+                                break;
+                        }
+                        break;
+                                      
+                    //przykladowny kod z neta
+                    /*case ArrowDown:
+                        tg.setForegroundColor(TextColor.ANSI.BLUE);
+                        tg.setBackgroundColor(TextColor.ANSI.GREEN);
+                        tg.putString(1, 1, "Size: " + screen.getTerminalSize().getColumns() + " x " + screen.getTerminalSize().getRows());
+                        screen.refresh();
+                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                    case Character:
+                        sb.append(keyPressed.getCharacter());
+                        System.out.println(keyPressed.getCharacter());
+                        break;
+                    case Enter:
+                        screen.clear();
+                        tg.putString(10, 10, sb.toString(), SGR.BOLD);
+                        screen.refresh();
+                        sb = new StringBuilder();
+                        break;
+                    case ArrowLeft:
+                        int row = 5, col = 60;
+                        for(SGR sgr : SGR.values()){
+                            tg.putString(col,row++, sgr.name(), sgr);
+                            System.out.println(sgr.name());
+                            screen.refresh();
+                        }
+                        break;
+                    case ArrowUp:
+                        tg.setForegroundColor(TextColor.ANSI.MAGENTA);
+                        for(int i=20; i<40; i++){
+                            tg.putString(i, 20, String.valueOf(Symbols.BLOCK_SOLID));
+                            //Thread.sleep(100);
+                            screen.refresh();
+                        }
+                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
                         
                         
+                    */
+                                      
                     //przykladowny kod z neta
                     /*case ArrowDown:
                         tg.setForegroundColor(TextColor.ANSI.BLUE);
