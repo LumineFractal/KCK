@@ -1,8 +1,5 @@
 package menu;
 
-import com.googlecode.lanterna.SGR;
-import com.googlecode.lanterna.Symbols;
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import static com.googlecode.lanterna.input.KeyType.Enter;
@@ -10,7 +7,9 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  *
@@ -18,7 +17,7 @@ import java.io.IOException;
  */
 public class Main {
     
-    public static void menu() throws IOException, InterruptedException {
+    public static void menu() throws IOException, InterruptedException, FileNotFoundException, ParseException {
         Terminal terminal = new DefaultTerminalFactory().createTerminal();
         Screen screen = new TerminalScreen(terminal);
         TextGraphics tg = screen.newTextGraphics();
@@ -36,7 +35,7 @@ public class Main {
         
         Menu menu1 = new Menu(terminal, screen, tg);
         menu1.show();
-        menu1.first();
+        menu1.first();  
         int choice = 0;
         
         boolean running = true;
@@ -79,6 +78,7 @@ public class Main {
                             case 0:
                                 break;
                             case 1:
+                                menu1.scoreboard();
                                 break;
                             default:
                                 running = false;
@@ -122,51 +122,11 @@ public class Main {
                         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
                         
                         
-                    */
-                                      
-                    //przykladowny kod z neta
-                    /*case ArrowDown:
-                        tg.setForegroundColor(TextColor.ANSI.BLUE);
-                        tg.setBackgroundColor(TextColor.ANSI.GREEN);
-                        tg.putString(1, 1, "Size: " + screen.getTerminalSize().getColumns() + " x " + screen.getTerminalSize().getRows());
-                        screen.refresh();
-                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                    case Character:
-                        sb.append(keyPressed.getCharacter());
-                        System.out.println(keyPressed.getCharacter());
-                        break;
-                    case Enter:
-                        screen.clear();
-                        tg.putString(10, 10, sb.toString(), SGR.BOLD);
-                        screen.refresh();
-                        sb = new StringBuilder();
-                        break;
-                    case ArrowLeft:
-                        int row = 5, col = 60;
-                        for(SGR sgr : SGR.values()){
-                            tg.putString(col,row++, sgr.name(), sgr);
-                            System.out.println(sgr.name());
-                            screen.refresh();
-                        }
-                        break;
-                    case ArrowUp:
-                        tg.setForegroundColor(TextColor.ANSI.MAGENTA);
-                        for(int i=20; i<40; i++){
-                            tg.putString(i, 20, String.valueOf(Symbols.BLOCK_SOLID));
-                            //Thread.sleep(100);
-                            screen.refresh();
-                        }
-                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                        
-                        
-                    */
-                        
-                        
+                    */         
                 }
             }
         }
-
+        
         /*Thread.currentThread();
         while(screen.readInput()==null){
             try {
@@ -178,7 +138,7 @@ public class Main {
         screen.stopScreen();
     }
     
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, FileNotFoundException, ParseException {
         menu();
     }
 }

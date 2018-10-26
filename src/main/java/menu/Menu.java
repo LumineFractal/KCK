@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package menu;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.Terminal;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  *
@@ -19,13 +16,13 @@ public class Menu {
     Terminal terminal;
     Screen screen;
     TextGraphics tg;
-    private int current;
+    Scores scoresM;
     
     public Menu(Terminal m, Screen s, TextGraphics t){
         this.terminal = m;
         this.screen = s;
         this.tg = t;
-        this.current = 1;
+        scoresM = new Scores();
     }
     
     public void show() throws IOException{
@@ -42,38 +39,7 @@ public class Menu {
         tg.putString(30, 11, "   ██║   ╚██████╔╝    ██║     ╚██████╔╝███████╗██║  ██║██║ ╚████║██████╔╝     ");
         tg.putString(30, 12, "   ╚═╝    ╚═════╝     ╚═╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝      ");
         
-        //ver 2
-        /*
-        tg.putString(10, 10, " ______  ______  ________  _________  ___   ___       ______   ______  ________  ______      ");
-        tg.putString(10, 11, "/_____/\\/_____/\\/_______/\\/________/\\/__/\\ /__/\\     /_____/\\ /_____/\\/_______/\\/_____/\\     ");
-        tg.putString(10, 12, "\\:::_ \\ \\::::_\\/\\::: _  \\ \\__.::.__\\/\\::\\ \\\\  \\ \\    \\:::_ \\ \\\\:::_ \\ \\::: _  \\ \\:::_ \\ \\    ");
-        tg.putString(10, 13, " \\:\\ \\ \\ \\:\\/___/\\::(_)  \\ \\ \\::\\ \\   \\::\\/_\\ .\\ \\    \\:(_) ) )\\:\\ \\ \\ \\::(_)  \\ \\:\\ \\ \\ \\   ");
-        tg.putString(10, 14, "  \\:\\ \\ \\ \\::___\\/\\:: __  \\ \\ \\::\\ \\   \\:: ___::\\ \\    \\: __ `\\ \\:\\ \\ \\ \\:: __  \\ \\:\\ \\ \\ \\  ");
-        tg.putString(10, 15, "   \\:\\/.:| \\:\\____/\\:.\\ \\  \\ \\ \\::\\ \\   \\: \\ \\\\::\\ \\    \\ \\ `\\ \\ \\:\\_\\ \\ \\:.\\ \\  \\ \\:\\/.:| | ");
-        tg.putString(10, 16, "    \\____/_/\\_____\\/\\__\\/\\__\\/  \\__\\/    \\__\\/ \\::\\/     \\_\\/ \\_\\/\\_____\\/\\__\\/\\__\\/\\____/_/ ");
-        tg.putString(10, 17, " _________  ______       ______  ______  __      ________  ___   __   ______                 ");
-        tg.putString(10, 18, "/________/\\/_____/\\     /_____/\\/_____/\\/_/\\    /_______/\\/__/\\ /__/\\/_____/\\                ");
-        tg.putString(10, 19, "\\__.::.__\\/\\:::_ \\ \\    \\:::_ \\ \\:::_ \\ \\:\\ \\   \\::: _  \\ \\::\\_\\\\  \\ \\:::_ \\ \\               ");
-        tg.putString(10, 20, "   \\::\\ \\   \\:\\ \\ \\ \\    \\:(_) \\ \\:\\ \\ \\ \\:\\ \\   \\::(_)  \\ \\:. `-\\  \\ \\:\\ \\ \\ \\              ");
-        tg.putString(10, 21, "    \\::\\ \\   \\:\\ \\ \\ \\    \\: ___\\/\\:\\ \\ \\ \\:\\ \\___\\:: __  \\ \\:. _    \\ \\:\\ \\ \\ \\             ");
-        tg.putString(10, 22, "     \\::\\ \\   \\:\\_\\ \\ \\    \\ \\ \\   \\:\\_\\ \\ \\:\\/___/\\:.\\ \\  \\ \\. \\`-\\  \\ \\:\\/.:| |            ");
-        tg.putString(10, 23, "      \\__\\/    \\_____\\/     \\_\\/    \\_____\\/\\_____\\/\\__\\/\\__\\/\\__\\/ \\__\\/\\____/_/            ");
-        */
         screen.refresh();
-        
-        //screen.refresh();
-        //terminal.readInput();//czeka na klawisz
-        //screen.doResizeIfNecessary();
-        //screen.clear();
-        //screen.refresh();
-        
-//  ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
-//  ████╗ ████║██╔════╝████╗  ██║██║   ██║
-//  ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
-//  ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
-//  ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
-//  ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ 
-//                                        
     }
     
     public void first() throws IOException{
@@ -113,5 +79,22 @@ public class Menu {
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
         screen.refresh();
+    }
+    
+    public void scoreboard() throws FileNotFoundException, ParseException, IOException{
+        scoresM.readScores();
+        
+        screen.clear();
+        show();
+        for(int i = 0; i < scoresM.scores.size(); i++) {
+            tg.putString(54, 16+(i*2), (i+1) + "   " +  scoresM.scores.get(i).getName() + "   " +
+                    scoresM.scores.get(i).getPoints() + "   " +
+                    scoresM.scores.get(i).getTime() + "   " + scoresM.scores.get(i).getDate());
+        }
+        tg.putString(5, 16, "PRESS ANY KEY TO GO TO MENU");
+        screen.refresh();
+        terminal.readInput();
+        screen.clear();
+        show();
     }
 }
