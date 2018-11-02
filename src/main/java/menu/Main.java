@@ -40,6 +40,7 @@ public class Main {
         
         boolean running = true;
         StringBuilder sb = new StringBuilder();
+        Game game;
         
         screen.doResizeIfNecessary();
         while(running){
@@ -76,6 +77,10 @@ public class Main {
                     case Enter:
                         switch (choice%3) {
                             case 0:
+                                game = new Game(terminal, screen, tg);
+                                game.init();
+                                game.run();
+                                menu1.show();
                                 break;
                             case 1:
                                 menu1.scoreboard();
