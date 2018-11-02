@@ -5,6 +5,8 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
+import static java.lang.Thread.sleep;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,16 +22,21 @@ public class Game {
     boolean gamerun;
     private int position;
     private static final String znak1 = String.valueOf((char)926) + String.valueOf((char)926) + String.valueOf((char)926);
+    Block blok;
+    ArrayList<Block> bloki;
+    private int counter;
     
     public Game(Terminal m, Screen s, TextGraphics t){
         points=0;
         combo=0;
         hp=20;
         position=3;
+        counter=0;
         this.terminal = m;
         this.screen = s;
         this.tg = t;
         this.gamerun = true;
+        bloki = new ArrayList();
     }
     
     public void init() throws IOException{
@@ -95,7 +102,7 @@ public class Game {
         showPosition();
     }
     
-    public void run() throws IOException{
+    public void run() throws IOException, InterruptedException{
         while(gamerun){
             screen.doResizeIfNecessary();
             KeyStroke keyPressed = terminal.pollInput();
@@ -120,8 +127,21 @@ public class Game {
                         break;
                 }
             }
+            sleep(70);
+            if(counter<20){
+                blok = new Block(terminal, screen, tg);
+                bloki.add(blok);
+                counter++;
+            }
+            blocksMove();
         }
         screen.clear();
+    }
+    
+    public void blocksMove() throws IOException{
+        for (Block blok1 : bloki) {
+            blok1.show();
+        }
     }
     
     public void showPosition() throws IOException{
