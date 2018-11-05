@@ -24,6 +24,7 @@ public class Block {
     TextGraphics tg;
     Random rand = new Random();
     static int empty = 0;
+    boolean[] full;
     
     public Block(Terminal m, Screen s, TextGraphics t){
         if(empty==0){
@@ -34,9 +35,79 @@ public class Block {
             empty=0;
         }
         place = -2;
+        full = new boolean[5];
+        load();
         this.terminal = m;
         this.screen = s;
         this.tg = t;
+    }
+    
+    private void load(){
+        switch(type){
+            case 1:
+                full[0]=true;
+                full[1]=false;
+                full[2]=false;
+                full[3]=false;
+                full[4]=true;
+                break;
+            case 2:
+                full[0]=true;
+                full[1]=false;
+                full[2]=true;
+                full[3]=false;
+                full[4]=false;
+                break;
+            case 3:
+                full[0]=false;
+                full[1]=false;
+                full[2]=true;
+                full[3]=false;
+                full[4]=true;
+                break;
+            case 4:
+                full[0]=false;
+                full[1]=true;
+                full[2]=true;
+                full[3]=false;
+                full[4]=false;
+                break;
+            case 5:
+                full[0]=true;
+                full[1]=false;
+                full[2]=false;
+                full[3]=true;
+                full[4]=false;
+                break;
+            case 6:
+                full[0]=true;
+                full[1]=false;
+                full[2]=true;
+                full[3]=false;
+                full[4]=true;
+                break;
+            case 7:
+                full[0]=false;
+                full[1]=true;
+                full[2]=false;
+                full[3]=false;
+                full[4]=false;
+                break;
+            case 8:
+                full[0]=false;
+                full[1]=false;
+                full[2]=false;
+                full[3]=true;
+                full[4]=false;
+                break;
+            default:
+                full[0]=false;
+                full[1]=false;
+                full[2]=false;
+                full[3]=false;
+                full[4]=false;
+                break;
+        }
     }
     
     public void show() throws IOException{
@@ -49,161 +120,31 @@ public class Block {
                 type = rand.nextInt(8)+1;
                 empty=0;
             }
+            load();
         }
         else{
             place+=2;
         }
+        
+        tg.setBackgroundColor(TextColor.ANSI.BLUE);
+        tg.setForegroundColor(TextColor.ANSI.GREEN);
+        tg.putString(43, place, "###");
+        tg.putString(43, place+1, "###");
+        tg.putString(61, place, "###");
+        tg.putString(61, place+1, "###");
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
 
-        switch(type){
-            case 1:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, place, "###");
-                tg.putString(43, place+1, "###");
-                tg.putString(61, place, "###");
-                tg.putString(61, place+1, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(49, place, "         ");
-                tg.putString(49, place+1, "         ");
-                tg.putString(46, place, "@@@");
-                tg.putString(46, place+1, "@@@");
-                tg.putString(58, place, "@@@");
-                tg.putString(58, place+1, "@@@");
-                break;
-            case 2:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, place, "###");
-                tg.putString(43, place+1, "###");
-                tg.putString(61, place, "###");
-                tg.putString(61, place+1, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(49, place, "   ");
-                tg.putString(49, place+1, "   ");
-                tg.putString(55, place, "      ");
-                tg.putString(55, place+1, "      ");
-                tg.putString(46, place, "@@@");
-                tg.putString(46, place+1, "@@@");
-                tg.putString(52, place, "@@@");
-                tg.putString(52, place+1, "@@@");
-                break;
-            case 3:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, place, "###");
-                tg.putString(43, place+1, "###");
-                tg.putString(61, place, "###");
-                tg.putString(61, place+1, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(46, place, "      ");
-                tg.putString(46, place+1, "      ");
-                tg.putString(55, place, "   ");
-                tg.putString(55, place+1, "   ");
-                tg.putString(52, place, "@@@");
-                tg.putString(52, place+1, "@@@");
-                tg.putString(58, place, "@@@");
-                tg.putString(58, place+1, "@@@");
-                break;
-            case 4:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, place, "###");
-                tg.putString(43, place+1, "###");
-                tg.putString(61, place, "###");
-                tg.putString(61, place+1, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(46, place, "   ");
-                tg.putString(46, place+1, "   ");
-                tg.putString(55, place, "      ");
-                tg.putString(55, place+1, "      ");
-                tg.putString(49, place, "@@@@@@");
-                tg.putString(49, place+1, "@@@@@@");
-                break;
-            case 5:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, place, "###");
-                tg.putString(43, place+1, "###");
-                tg.putString(61, place, "###");
-                tg.putString(61, place+1, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(49, place, "      ");
-                tg.putString(49, place+1, "      ");
-                tg.putString(58, place, "   ");
-                tg.putString(58, place+1, "   ");
-                tg.putString(46, place, "@@@");
-                tg.putString(46, place+1, "@@@");
-                tg.putString(55, place, "@@@");
-                tg.putString(55, place+1, "@@@");
-                break;
-            case 6:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, place, "###");
-                tg.putString(43, place+1, "###");
-                tg.putString(61, place, "###");
-                tg.putString(61, place+1, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(49, place, "      ");
-                tg.putString(49, place+1, "      ");
-                tg.putString(58, place, "   ");
-                tg.putString(58, place+1, "   ");
-                tg.putString(46, place, "@@@");
-                tg.putString(46, place+1, "@@@");
-                tg.putString(55, place, "@@@");
-                tg.putString(55, place+1, "@@@");
-                break;
-            case 7:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, place, "###");
-                tg.putString(43, place+1, "###");
-                tg.putString(61, place, "###");
-                tg.putString(61, place+1, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(46, place, "   ");
-                tg.putString(46, place+1, "   ");
-                tg.putString(52, place, "         ");
-                tg.putString(52, place+1, "         ");
-                tg.putString(49, place, "@@@");
-                tg.putString(49, place+1, "@@@");
-                break;
-            case 8:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, place, "###");
-                tg.putString(43, place+1, "###");
-                tg.putString(61, place, "###");
-                tg.putString(61, place+1, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(46, place, "         ");
-                tg.putString(46, place+1, "         ");
-                tg.putString(58, place, "   ");
-                tg.putString(58, place+1, "   ");
-                tg.putString(55, place, "@@@");
-                tg.putString(55, place+1, "@@@");
-                break;
-            default:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, place, "###");
-                tg.putString(43, place+1, "###");
-                tg.putString(61, place, "###");
-                tg.putString(61, place+1, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(46, place, "               ");
-                tg.putString(46, place+1, "               ");
-                break;
+        for(int i=0; i<5; i++){
+            if(full[i]==true){
+                tg.putString(46+(i*3), place, "@@@");
+                tg.putString(46+(i*3), place+1, "@@@");
+            }else{
+                tg.putString(46+(i*3), place, "   ");
+                tg.putString(46+(i*3), place+1, "   ");
+            }
         }
+
         screen.refresh();
     }
 }
