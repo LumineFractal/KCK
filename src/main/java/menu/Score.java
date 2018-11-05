@@ -41,5 +41,9 @@ public class Score {
     public void setTime(String time) {
         this.time = time;
     }
+    
+    public String toString() {
+        return this.name+" "+this.points+" "+this.date+" "+this.time;
+    }
   
 }
