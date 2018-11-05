@@ -35,8 +35,9 @@ public class Game {
     Block blok;
     ArrayList<Block> bloki;
     private int counter;
+    Scores scor;
 
-    public Game(Terminal m, Screen s, TextGraphics t) {
+    public Game(Terminal m, Screen s, TextGraphics t, Scores scor) {
         points = 0;
         combo = 0;
         hp = 20;
@@ -47,6 +48,7 @@ public class Game {
         this.tg = t;
         this.gamerun = true;
         bloki = new ArrayList();
+        this.scor = scor;
     }
 
     public void init() throws IOException {
@@ -250,8 +252,6 @@ public class Game {
         tmp.setDate(date);
         tmp.setTime(date2);
         
-        
-        Scores saving = new Scores();
         boolean saverun = true;
         sleep(250);
         while(saverun){
@@ -262,17 +262,20 @@ public class Game {
                 switch (keyPressed.getKeyType()) {
                     case Escape:
                         tmp.setName("Anonymous");
-                        saving.readScores();
-                        saving.scores.add(tmp);
-                        saving.saveScores();
+                        scor.readScores();
+                        scor.scores.add(tmp);
+                        scor.saveScores();
                         saverun = false;
                         break;
                     case Enter:
                         tmp.setName(sb.toString());
-                        saving.readScores();
-                        saving.scores.add(tmp);
-                        saving.saveScores();
+                        scor.readScores();
+                        scor.scores.add(tmp);
+                        scor.saveScores();
                         saverun = false;
+                        break;
+                    case Backspace:
+                        //sb.deleteCharAt(zmienna)
                         break;
                     default:
                         sb.append(keyPressed.getCharacter());

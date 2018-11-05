@@ -82,7 +82,7 @@ public class Main {
                     case Enter:
                         switch (choice%4) {
                             case 0:
-                                game = new Game(terminal, screen, tg);
+                                game = new Game(terminal, screen, tg, menu1.scoresM);
                                 game.init();
                                 Music.stop();
                                 Music.playMenu(2);
