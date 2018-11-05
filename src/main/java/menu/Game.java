@@ -105,32 +105,38 @@ public class Game {
         showPosition();
     }
     
-    public void run() throws IOException, InterruptedException{
-        while(gamerun){
+    public void run() throws IOException, InterruptedException {
+        while (gamerun) {
             screen.doResizeIfNecessary();
-            KeyStroke keyPressed = terminal.pollInput();
-            
-            if(keyPressed != null){
-                System.out.println(keyPressed);
-                switch(keyPressed.getKeyType()){
-                    case Escape:
-                        gamerun = false;
-                        break;
-                    case ArrowLeft:
-                        if(position>1){
-                            position-=1;
-                        }
-                        showPosition();
-                        break;
-                    case ArrowRight:
-                        if(position<5){
-                            position+=1;
-                        }
-                        showPosition();
-                        break;
+
+            int time = 70;
+            for (int i = 0; i < time; i++) {
+                sleep(1);
+                KeyStroke keyPressed = terminal.pollInput();
+
+                if (keyPressed != null) {
+                    System.out.println(keyPressed);
+                    switch (keyPressed.getKeyType()) {
+                        case Escape:
+                            gamerun = false;
+                            break;
+                        case ArrowLeft:
+                            if (position > 1) {
+                                position -= 1;
+                            }
+                            showPosition();
+                            break;
+                        case ArrowRight:
+                            if (position < 5) {
+                                position += 1;
+                            }
+                            showPosition();
+                            break;
+                    }
                 }
             }
-            sleep(70);
+            
+           // sleep(70);
             if(counter<20){
                 blok = new Block(terminal, screen, tg);
                 bloki.add(blok);
