@@ -273,7 +273,7 @@ public class Game {
                             tmp.setName("Anonymous");
                         else
                         tmp.setName(sb.toString());
-                            scor.readScores();
+                        scor.readScores();
                         scor.scores.add(tmp);
                         scor.saveScores();
                         saverun = false;
