@@ -57,8 +57,8 @@ public class Block {
                 tg.putString(40, place+1, "   ###   @@@@@@      ###   ");
                 break;
             case 5:
-                tg.putString(40, place, "   ###@@@   @@@      ###   ");
-                tg.putString(40, place+1, "   ###@@@   @@@      ###   ");
+                tg.putString(40, place, "   ###@@@      @@@   ###   ");
+                tg.putString(40, place+1, "   ###@@@      @@@   ###   ");
                 break;
             case 6:
                 tg.putString(40, place, "   ###            @@@###   ");

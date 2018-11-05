@@ -42,11 +42,13 @@ public class Game {
     
     public void init() throws IOException{
         screen.clear();
+        tg.setForegroundColor(TextColor.ANSI.RED);
         tg.putString(4, 1, "HP: ");
         for(int j= 8; j < 8 + hp; j++){
             tg.putString(j, 1, String.valueOf((char)847));
             //tg.putString(j, 1, String.valueOf((char)926));
         }
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.putString(4, 3, "Points: " + points);
         tg.putString(4, 5, "Combo: " + combo + "x");
         for(int i = 1; i < 40; i++){
@@ -148,54 +150,89 @@ public class Game {
     public void showPosition() throws IOException{
         switch(position){
             case 1:
-                tg.putString(40, 40, "   ###");
-                tg.putString(49, 40, "            ###   ");
+                tg.setBackgroundColor(TextColor.ANSI.BLUE);
+                tg.setForegroundColor(TextColor.ANSI.GREEN);
+                tg.putString(43, 40, "###");
+                tg.putString(43, 41, "###");
+                tg.putString(61, 40, "###");
+                tg.putString(61, 41, "###");
+                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
                 tg.setForegroundColor(TextColor.ANSI.RED);
                 tg.putString(46, 40, znak1);
                 tg.putString(46, 41, znak1);
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(40, 41, "   ###");
-                tg.putString(49, 41, "            ###   ");
+                tg.putString(49, 40, "            ");
+                tg.putString(49, 41, "            ");
                 break;
             case 2:
-                tg.putString(40, 40, "   ###   ");
-                tg.putString(52, 40, "         ###   ");
+                tg.setBackgroundColor(TextColor.ANSI.BLUE);
+                tg.setForegroundColor(TextColor.ANSI.GREEN);
+                tg.putString(43, 40, "###");
+                tg.putString(43, 41, "###");
+                tg.putString(61, 40, "###");
+                tg.putString(61, 41, "###");
+                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                tg.setForegroundColor(TextColor.ANSI.RED);
+                tg.putString(46, 40, "   ");
+                tg.putString(46, 41, "   ");
                 tg.setForegroundColor(TextColor.ANSI.RED);
                 tg.putString(49, 40, znak1);
                 tg.putString(49, 41, znak1);
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(40, 41, "   ###   ");
-                tg.putString(52, 41, "         ###   ");
+                tg.putString(52, 40, "         ");
+                tg.putString(52, 41, "         ");
                 break;
             case 3:
-                tg.putString(40, 40, "   ###      ");
-                tg.putString(55, 40, "      ###   ");
+                tg.setBackgroundColor(TextColor.ANSI.BLUE);
+                tg.setForegroundColor(TextColor.ANSI.GREEN);
+                tg.putString(43, 40, "###");
+                tg.putString(43, 41, "###");
+                tg.putString(61, 40, "###");
+                tg.putString(61, 41, "###");
+                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                tg.setForegroundColor(TextColor.ANSI.RED);
+                tg.putString(46, 40, "      ");
+                tg.putString(46, 41, "      ");
                 tg.setForegroundColor(TextColor.ANSI.RED);
                 tg.putString(52, 40, znak1);
                 tg.putString(52, 41, znak1);
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(40, 41, "   ###      ");
-                tg.putString(55, 41, "      ###   ");
+                tg.putString(55, 40, "      ");
+                tg.putString(55, 41, "      ");
                 break;
             case 4:
-                tg.putString(40, 40, "   ###         ");
-                tg.putString(58, 40, "   ###   ");
+                tg.setBackgroundColor(TextColor.ANSI.BLUE);
+                tg.setForegroundColor(TextColor.ANSI.GREEN);
+                tg.putString(43, 40, "###");
+                tg.putString(43, 41, "###");
+                tg.putString(61, 40, "###");
+                tg.putString(61, 41, "###");
+                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                tg.setForegroundColor(TextColor.ANSI.RED);
+                tg.putString(46, 40, "         ");
+                tg.putString(46, 41, "         ");
                 tg.setForegroundColor(TextColor.ANSI.RED);
                 tg.putString(55, 40, znak1);
                 tg.putString(55, 41, znak1);
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(40, 41, "   ###         ");
-                tg.putString(58, 41, "   ###   ");
+                tg.putString(58, 40, "   ");
+                tg.putString(58, 41, "   ");
                 break;
             case 5:
-                tg.putString(40, 40, "   ###            ");
-                tg.putString(61, 40, "###   ");
+                tg.setBackgroundColor(TextColor.ANSI.BLUE);
+                tg.setForegroundColor(TextColor.ANSI.GREEN);
+                tg.putString(43, 40, "###");
+                tg.putString(43, 41, "###");
+                tg.putString(61, 40, "###");
+                tg.putString(61, 41, "###");
+                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                tg.setForegroundColor(TextColor.ANSI.RED);
+                tg.putString(46, 40, "            ");
+                tg.putString(46, 41, "            ");
                 tg.setForegroundColor(TextColor.ANSI.RED);
                 tg.putString(58, 40, znak1);
                 tg.putString(58, 41, znak1);
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(40, 41, "   ###            ");
-                tg.putString(61, 41, "###   ");
                 break;
         }
         screen.refresh();
