@@ -83,18 +83,6 @@ public class Main {
                         switch (choice%4) {
                             case 0:
                                 menu1.difficulty();
-                                
-                                
-                                /*game = new Game(terminal, screen, tg, menu1.scoresM);
-                                game.init();
-                                Music.stop();
-                                Music.playMenu(2);
-                                Music.setLevel(menu1.getMusicVolume());
-                                game.run();
-                                Music.stop();
-                                Music.playMenu(1);
-                                Music.setLevel(menu1.getMusicVolume());
-                                menu1.show();*/
                                 break;
                             case 1:
                                 menu1.scoreboard();
@@ -107,56 +95,9 @@ public class Main {
                                 break;
                         }
                         break;
-                                      
-                    //przykladowny kod z neta
-                    /*case ArrowDown:
-                        tg.setForegroundColor(TextColor.ANSI.BLUE);
-                        tg.setBackgroundColor(TextColor.ANSI.GREEN);
-                        tg.putString(1, 1, "Size: " + screen.getTerminalSize().getColumns() + " x " + screen.getTerminalSize().getRows());
-                        screen.refresh();
-                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                    case Character:
-                        sb.append(keyPressed.getCharacter());
-                        System.out.println(keyPressed.getCharacter());
-                        break;
-                    case Enter:
-                        screen.clear();
-                        tg.putString(10, 10, sb.toString(), SGR.BOLD);
-                        screen.refresh();
-                        sb = new StringBuilder();
-                        break;
-                    case ArrowLeft:
-                        int row = 5, col = 60;
-                        for(SGR sgr : SGR.values()){
-                            tg.putString(col,row++, sgr.name(), sgr);
-                            System.out.println(sgr.name());
-                            screen.refresh();
-                        }
-                        break;
-                    case ArrowUp:
-                        tg.setForegroundColor(TextColor.ANSI.MAGENTA);
-                        for(int i=20; i<40; i++){
-                            tg.putString(i, 20, String.valueOf(Symbols.BLOCK_SOLID));
-                            //Thread.sleep(100);
-                            screen.refresh();
-                        }
-                        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-                        
-                        
-                    */         
                 }
             }
         }
-        
-        /*Thread.currentThread();
-        while(screen.readInput()==null){
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }*/
         screen.stopScreen();
     }
      

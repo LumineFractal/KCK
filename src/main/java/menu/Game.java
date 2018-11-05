@@ -232,14 +232,13 @@ public class Game {
     
     private void gameover() throws IOException, FileNotFoundException, ParseException, InterruptedException {
         screen.clear();
-        tg.putString(34, 10, "GAME OVER");
         tg.putString(34, 12, "Put your name here and press Enter: ");
         tg.setForegroundColor(TextColor.ANSI.BLACK);
         tg.setBackgroundColor(TextColor.ANSI.YELLOW);
         tg.putString(36, 14, "                             ");
         screen.refresh();
         
-        //String name;
+        int counterGO = 0;
         StringBuilder sb = new StringBuilder();
         int index = 37;
         Score tmp = new Score();
@@ -256,6 +255,7 @@ public class Game {
         boolean saverun = true;
         sleep(250);
         while(saverun){
+            sleep(60);
             KeyStroke keyPressed = terminal.pollInput();
             
             if (keyPressed != null) {
@@ -269,8 +269,11 @@ public class Game {
                         saverun = false;
                         break;
                     case Enter:
+                        if(sb.toString().isEmpty())
+                            tmp.setName("Anonymous");
+                        else
                         tmp.setName(sb.toString());
-                        scor.readScores();
+                            scor.readScores();
                         scor.scores.add(tmp);
                         scor.saveScores();
                         saverun = false;
@@ -278,7 +281,6 @@ public class Game {
                     case ArrowLeft:
                     case ArrowRight:
                     case Backspace:
-                        //sb.deleteCharAt(zmienna)
                         break;
                     default:
                         sb.append(keyPressed.getCharacter());
@@ -288,6 +290,59 @@ public class Game {
                         break;
                 }
             }
+            tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+            tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+            if(counterGO>3){
+                counterGO=0;
+            }
+            switch(counterGO){
+                case 0:
+                    tg.putString(10, 2, "  /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$        /$$$$$$  /$$    /$$ /$$$$$$$$ /$$$$$$$ ");
+                    tg.putString(10, 3, " /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/       /$$__  $$| $$   | $$| $$_____/| $$__  $$");
+                    tg.putString(10, 4, "| $$  \\__/| $$  \\ $$| $$$$  /$$$$| $$            | $$  \\ $$| $$   | $$| $$      | $$  \\ $$");
+                    tg.putString(10, 5, "| $$ /$$$$| $$$$$$$$| $$ $$/$$ $$| $$$$$         | $$  | $$|  $$ / $$/| $$$$$   | $$$$$$$/");
+                    tg.putString(10, 6, "| $$|_  $$| $$__  $$| $$  $$$| $$| $$__/         | $$  | $$ \\  $$ $$/ | $$__/   | $$__  $$");
+                    tg.putString(10, 7, "| $$  \\ $$| $$  | $$| $$\\  $ | $$| $$            | $$  | $$  \\  $$$/  | $$      | $$  \\ $$");
+                    tg.putString(10, 8, "|  $$$$$$/| $$  | $$| $$ \\/  | $$| $$$$$$$$      |  $$$$$$/   \\  $/   | $$$$$$$$| $$  | $$");
+                    tg.putString(10, 9, " \\______/ |__/  |__/|__/     |__/|________/       \\______/     \\_/    |________/|__/  |__/");
+                    break;
+                case 1:
+                    tg.putString(10, 2, " $$$$$$\\   $$$$$$\\  $$\\      $$\\ $$$$$$$$\\        $$$$$$\\  $$\\    $$\\ $$$$$$$$\\ $$$$$$$\\  ");
+                    tg.putString(10, 3, "$$  __$$\\ $$  __$$\\ $$$\\    $$$ |$$  _____|      $$  __$$\\ $$ |   $$ |$$  _____|$$  __$$\\ ");
+                    tg.putString(10, 4, "$$ /  \\__|$$ /  $$ |$$$$\\  $$$$ |$$ |            $$ /  $$ |$$ |   $$ |$$ |      $$ |  $$ |");
+                    tg.putString(10, 5, "$$ |$$$$\\ $$$$$$$$ |$$\\$$\\$$ $$ |$$$$$\\          $$ |  $$ |\\$$\\  $$  |$$$$$\\    $$$$$$$  |");
+                    tg.putString(10, 6, "$$ |\\_$$ |$$  __$$ |$$ \\$$$  $$ |$$  __|         $$ |  $$ | \\$$\\$$  / $$  __|   $$  __$$< ");
+                    tg.putString(10, 7, "$$ |  $$ |$$ |  $$ |$$ |\\$  /$$ |$$ |            $$ |  $$ |  \\$$$  /  $$ |      $$ |  $$ |");
+                    tg.putString(10, 8, "\\$$$$$$  |$$ |  $$ |$$ | \\_/ $$ |$$$$$$$$\\        $$$$$$  |   \\$  /   $$$$$$$$\\ $$ |  $$ |");
+                    tg.putString(10, 9, " \\______/ \\__|  \\__|\\__|     \\__|\\________|       \\______/     \\_/    \\________|\\__|  \\__|");
+                    break;
+                case 2:
+                    tg.putString(10, 2, "  ______    ______   __       __  ________         ______   __     __  ________  _______  ");
+                    tg.putString(10, 3, " /      \\  /      \\ |  \\     /  \\|        \\       /      \\ |  \\   |  \\|        \\|       \\ ");
+                    tg.putString(10, 4, "|  $$$$$$\\|  $$$$$$\\| $$\\   /  $$| $$$$$$$$      |  $$$$$$\\| $$   | $$| $$$$$$$$| $$$$$$$\\");
+                    tg.putString(10, 5, "| $$ __\\$$| $$__| $$| $$$\\ /  $$$| $$__          | $$  | $$| $$   | $$| $$__    | $$__| $$");
+                    tg.putString(10, 6, "| $$|    \\| $$    $$| $$$$\\  $$$$| $$  \\         | $$  | $$ \\$$\\ /  $$| $$  \\   | $$    $$");
+                    tg.putString(10, 7, "| $$ \\$$$$| $$$$$$$$| $$\\$$ $$ $$| $$$$$         | $$  | $$  \\$$\\  $$ | $$$$$   | $$$$$$$\\");
+                    tg.putString(10, 8, "| $$__| $$| $$  | $$| $$ \\$$$| $$| $$_____       | $$__/ $$   \\$$ $$  | $$_____ | $$  | $$");
+                    tg.putString(10, 9, " \\$$    $$| $$  | $$| $$  \\$ | $$| $$     \\       \\$$    $$    \\$$$   | $$     \\| $$  | $$");
+                    tg.putString(10, 10, "  \\$$$$$$  \\$$   \\$$ \\$$      \\$$ \\$$$$$$$$        \\$$$$$$      \\$     \\$$$$$$$$ \\$$   \\$$");
+                    break;
+                case 3:
+                    tg.putString(10, 2, "  ______    ______   __       __  ________         ______   __     __  ________  _______  ");
+                    tg.putString(10, 3, " /      \\  /      \\ /  \\     /  |/        |       /      \\ /  |   /  |/        |/       \\ ");
+                    tg.putString(10, 4, "/$$$$$$  |/$$$$$$  |$$  \\   /$$ |$$$$$$$$/       /$$$$$$  |$$ |   $$ |$$$$$$$$/ $$$$$$$  |");
+                    tg.putString(10, 5, "$$ | _$$/ $$ |__$$ |$$$  \\ /$$$ |$$ |__          $$ |  $$ |$$ |   $$ |$$ |__    $$ |__$$ |");
+                    tg.putString(10, 6, "$$ |/    |$$    $$ |$$$$  /$$$$ |$$    |         $$ |  $$ |$$  \\ /$$/ $$    |   $$    $$< ");
+                    tg.putString(10, 7, "$$ |$$$$ |$$$$$$$$ |$$ $$ $$/$$ |$$$$$/          $$ |  $$ | $$  /$$/  $$$$$/    $$$$$$$  |");
+                    tg.putString(10, 8, "$$ \\__$$ |$$ |  $$ |$$ |$$$/ $$ |$$ |_____       $$ \\__$$ |  $$ $$/   $$ |_____ $$ |  $$ |");
+                    tg.putString(10, 9, "$$    $$/ $$ |  $$ |$$ | $/  $$ |$$       |      $$    $$/    $$$/    $$       |$$ |  $$ |");
+                    tg.putString(10, 10, " $$$$$$/  $$/   $$/ $$/      $$/ $$$$$$$$/        $$$$$$/      $/     $$$$$$$$/ $$/   $$/ "); 
+                    break;
+            }
+            counterGO++;
+            tg.setForegroundColor(TextColor.ANSI.BLACK);
+            tg.setBackgroundColor(TextColor.ANSI.YELLOW);
+            screen.refresh();
         }
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
