@@ -82,7 +82,10 @@ public class Main {
                     case Enter:
                         switch (choice%4) {
                             case 0:
-                                game = new Game(terminal, screen, tg, menu1.scoresM);
+                                menu1.difficulty();
+                                
+                                
+                                /*game = new Game(terminal, screen, tg, menu1.scoresM);
                                 game.init();
                                 Music.stop();
                                 Music.playMenu(2);
@@ -91,7 +94,7 @@ public class Main {
                                 Music.stop();
                                 Music.playMenu(1);
                                 Music.setLevel(menu1.getMusicVolume());
-                                menu1.show();
+                                menu1.show();*/
                                 break;
                             case 1:
                                 menu1.scoreboard();

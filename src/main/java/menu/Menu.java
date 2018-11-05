@@ -261,4 +261,128 @@ public class Menu {
         screen.clear();
         show();
     }
+
+    public void firstDiff() throws IOException{
+        tg.setForegroundColor(TextColor.ANSI.BLACK);
+        tg.setBackgroundColor(TextColor.ANSI.YELLOW);
+        tg.putString(54, 16, "-->");
+        tg.putString(63, 16, "EASY");
+        tg.putString(78, 16, "<--");
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(54, 18, "         NORMAL            ");
+        tg.putString(54, 20, "         HARD              ");
+        screen.refresh();
+    }
+    
+    public void secondDiff() throws IOException{
+        tg.putString(54, 16, "         EASY              ");
+        tg.setForegroundColor(TextColor.ANSI.BLACK);
+        tg.setBackgroundColor(TextColor.ANSI.YELLOW);
+        tg.putString(54, 18, "-->");
+        tg.putString(63, 18, "NORMAL");
+        tg.putString(78, 18, "<--");
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.putString(54, 20, "         HARD              ");
+        screen.refresh();
+    }
+    
+        public void thirdDiff() throws IOException{
+        tg.putString(54, 16, "         EASY              ");
+        tg.putString(54, 18, "         NORMAL            ");
+        tg.setForegroundColor(TextColor.ANSI.BLACK);
+        tg.setBackgroundColor(TextColor.ANSI.YELLOW);
+        tg.putString(54, 20, "-->");
+        tg.putString(63, 20, "HARD");
+        tg.putString(78, 20, "<--");
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        screen.refresh();
+    }
+    
+    public void difficulty() throws IOException, InterruptedException, FileNotFoundException, ParseException {
+        screen.clear();
+        show();
+        
+        boolean runD = true;
+        int choiceD = 0;
+        Game game;
+        
+        while(runD){
+            KeyStroke keyPressedD = terminal.pollInput();
+            
+            switch (choiceD) {
+                case 0:
+                    firstDiff();
+                    break;
+                case 1:
+                    secondDiff();
+                    break;
+                default:
+                    thirdDiff();
+                    break;
+            }
+        
+        
+            if(choiceD>3000)
+                choiceD-=2700;
+            
+            if(keyPressedD != null){
+                System.out.println(keyPressedD);
+                switch(keyPressedD.getKeyType()){
+                    case Escape:
+                        runD = false;
+                        break;
+                    case ArrowDown:
+                        choiceD = (choiceD + 1) % 3;
+                        break;
+                    case ArrowUp:
+                        choiceD = (choiceD + 2) % 3;
+                        break;
+                    case Enter:
+                        switch (choiceD%3) {
+                            case 0:
+                                game = new Game(terminal, screen, tg, this.scoresM, 100);
+                                game.init();
+                                Music.stop();
+                                Music.playMenu(2);
+                                Music.setLevel(getMusicVolume());
+                                game.run();
+                                Music.stop();
+                                Music.playMenu(1);
+                                Music.setLevel(getMusicVolume());
+                                show();
+                                break;
+                            case 1:
+                                game = new Game(terminal, screen, tg, this.scoresM, 70);
+                                game.init();
+                                Music.stop();
+                                Music.playMenu(2);
+                                Music.setLevel(getMusicVolume());
+                                game.run();
+                                Music.stop();
+                                Music.playMenu(1);
+                                Music.setLevel(getMusicVolume());
+                                show();
+                                break;
+                            case 2:
+                                game = new Game(terminal, screen, tg, this.scoresM, 45);
+                                game.init();
+                                Music.stop();
+                                Music.playMenu(2);
+                                Music.setLevel(getMusicVolume());
+                                game.run();
+                                Music.stop();
+                                Music.playMenu(1);
+                                Music.setLevel(getMusicVolume());
+                                show();
+                                break;
+                        }
+                        runD=false;
+                        break;
+                }
+            }
+        }
+    }
 }

@@ -24,6 +24,7 @@ public class Game {
     private int points;
     private int combo;
     private int hp;
+    private int time;
     Terminal terminal;
     Screen screen;
     TextGraphics tg;
@@ -37,12 +38,13 @@ public class Game {
     private int counter;
     Scores scor;
 
-    public Game(Terminal m, Screen s, TextGraphics t, Scores scor) {
+    public Game(Terminal m, Screen s, TextGraphics t, Scores scor, int time) {
         points = 0;
         combo = 0;
         hp = 20;
         position = 3;
         counter = 0;
+        this.time = time;
         this.terminal = m;
         this.screen = s;
         this.tg = t;
@@ -77,7 +79,6 @@ public class Game {
         while (gamerun) {
             screen.doResizeIfNecessary();
 
-            int time = 50;
             for (int i = 0; i < time; i++) {
                 sleep(1);
                 KeyStroke keyPressed = terminal.pollInput();
