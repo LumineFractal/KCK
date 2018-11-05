@@ -35,6 +35,8 @@ public class Main {
         
         Menu menu1 = new Menu(terminal, screen, tg);
         menu1.show();
+        Music.playMenu(1);
+        Music.setLevel(0.2);
         menu1.first();  
         int choice = 0;
         
@@ -54,13 +56,16 @@ public class Main {
                 case 1:
                     menu1.second();
                     break;
-                default:
+                case 2:
                     menu1.third();
+                    break;
+                default:
+                    menu1.forth();
                     break;
             }
                     
             if(choice>3000)
-                    choice-=2700;
+                    choice-=2800;
             
             if(keyPressed != null){
                 System.out.println(keyPressed);
@@ -69,21 +74,30 @@ public class Main {
                         running = false;
                         break;
                     case ArrowDown:
-                        choice = (choice + 1) % 3;
+                        choice = (choice + 1) % 4;
                         break;
                     case ArrowUp:
-                        choice = (choice + 2) % 3;
+                        choice = (choice + 3) % 4;
                         break;
                     case Enter:
-                        switch (choice%3) {
+                        switch (choice%4) {
                             case 0:
                                 game = new Game(terminal, screen, tg);
                                 game.init();
+                                Music.stop();
+                                Music.playMenu(2);
+                                Music.setLevel(menu1.getMusicVolume());
                                 game.run();
+                                Music.stop();
+                                Music.playMenu(1);
+                                Music.setLevel(menu1.getMusicVolume());
                                 menu1.show();
                                 break;
                             case 1:
                                 menu1.scoreboard();
+                                break;
+                            case 2:
+                                menu1.options();
                                 break;
                             default:
                                 running = false;
@@ -142,7 +156,7 @@ public class Main {
         }*/
         screen.stopScreen();
     }
-    
+     
     public static void main(String[] args) throws IOException, InterruptedException, FileNotFoundException, ParseException {
         menu();
     }
