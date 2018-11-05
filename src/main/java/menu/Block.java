@@ -46,7 +46,7 @@ public class Block {
                 type = 9;
                 empty++;
             }else{
-                type = rand.nextInt(12)+1;
+                type = rand.nextInt(8)+1;
                 empty=0;
             }
         }
