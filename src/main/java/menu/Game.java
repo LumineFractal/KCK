@@ -52,8 +52,13 @@ public class Game {
         tg.putString(4, 3, "Points: " + points);
         tg.putString(4, 5, "Combo: " + combo + "x");
         for(int i = 1; i < 40; i++){
-            tg.putString(40, i, "   ###               ###   ");
-            
+            tg.setBackgroundColor(TextColor.ANSI.BLUE);
+            tg.setForegroundColor(TextColor.ANSI.GREEN);
+            tg.putString(43, i, "###               ###");
+            tg.putString(61, i, "###");
+            tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+            tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+            tg.putString(46, i, "               ");
             //test znakow
             /*
             tg.putString(30, i, String.valueOf((char)(150+i)));
@@ -109,7 +114,7 @@ public class Game {
         while (gamerun) {
             screen.doResizeIfNecessary();
 
-            int time = 70;
+            int time = 100;
             for (int i = 0; i < time; i++) {
                 sleep(1);
                 KeyStroke keyPressed = terminal.pollInput();
