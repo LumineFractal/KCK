@@ -274,6 +274,8 @@ public class Game {
                         scor.saveScores();
                         saverun = false;
                         break;
+                    case ArrowLeft:
+                    case ArrowRight:
                     case Backspace:
                         //sb.deleteCharAt(zmienna)
                         break;
