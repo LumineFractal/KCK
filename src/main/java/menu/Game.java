@@ -155,20 +155,23 @@ public class Game {
     public void blocksMove() throws IOException{
         for (Block blok1 : bloki) {
             blok1.show();
+            if(blok1.place==38 && Block.falsefull!=null){
+                checkCollisions();
+            }
         }
     }
     
     public void showPosition() throws IOException{
+        tg.setBackgroundColor(TextColor.ANSI.BLUE);
+        tg.setForegroundColor(TextColor.ANSI.GREEN);
+        tg.putString(43, 40, "###");
+        tg.putString(43, 41, "###");
+        tg.putString(61, 40, "###");
+        tg.putString(61, 41, "###");
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        tg.setForegroundColor(TextColor.ANSI.RED);
         switch(position){
             case 1:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, 40, "###");
-                tg.putString(43, 41, "###");
-                tg.putString(61, 40, "###");
-                tg.putString(61, 41, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.RED);
                 tg.putString(46, 40, znak1);
                 tg.putString(46, 41, znak1);
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
@@ -176,14 +179,6 @@ public class Game {
                 tg.putString(49, 41, "            ");
                 break;
             case 2:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, 40, "###");
-                tg.putString(43, 41, "###");
-                tg.putString(61, 40, "###");
-                tg.putString(61, 41, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.RED);
                 tg.putString(46, 40, "   ");
                 tg.putString(46, 41, "   ");
                 tg.setForegroundColor(TextColor.ANSI.RED);
@@ -194,14 +189,6 @@ public class Game {
                 tg.putString(52, 41, "         ");
                 break;
             case 3:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, 40, "###");
-                tg.putString(43, 41, "###");
-                tg.putString(61, 40, "###");
-                tg.putString(61, 41, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.RED);
                 tg.putString(46, 40, "      ");
                 tg.putString(46, 41, "      ");
                 tg.setForegroundColor(TextColor.ANSI.RED);
@@ -212,14 +199,6 @@ public class Game {
                 tg.putString(55, 41, "      ");
                 break;
             case 4:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, 40, "###");
-                tg.putString(43, 41, "###");
-                tg.putString(61, 40, "###");
-                tg.putString(61, 41, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.RED);
                 tg.putString(46, 40, "         ");
                 tg.putString(46, 41, "         ");
                 tg.setForegroundColor(TextColor.ANSI.RED);
@@ -230,14 +209,6 @@ public class Game {
                 tg.putString(58, 41, "   ");
                 break;
             case 5:
-                tg.setBackgroundColor(TextColor.ANSI.BLUE);
-                tg.setForegroundColor(TextColor.ANSI.GREEN);
-                tg.putString(43, 40, "###");
-                tg.putString(43, 41, "###");
-                tg.putString(61, 40, "###");
-                tg.putString(61, 41, "###");
-                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.setForegroundColor(TextColor.ANSI.RED);
                 tg.putString(46, 40, "            ");
                 tg.putString(46, 41, "            ");
                 tg.setForegroundColor(TextColor.ANSI.RED);
@@ -247,5 +218,12 @@ public class Game {
                 break;
         }
         screen.refresh();
+    }
+
+    private void checkCollisions() {
+        if(Block.falsefull[position-1]==true){
+            hp-=2;
+            System.out.println("Murzyny" + position);
+        }
     }
 }

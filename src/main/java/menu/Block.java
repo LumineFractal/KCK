@@ -25,6 +25,7 @@ public class Block {
     Random rand = new Random();
     static int empty = 0;
     boolean[] full;
+    static boolean[] falsefull;
     
     public Block(Terminal m, Screen s, TextGraphics t){
         if(empty==0){
@@ -120,6 +121,7 @@ public class Block {
                 type = rand.nextInt(8)+1;
                 empty=0;
             }
+            falsefull = full;
             load();
         }
         else{
