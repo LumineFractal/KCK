@@ -269,6 +269,9 @@ public class Game {
                         saverun = false;
                         break;
                     case Enter:
+                        if(sb.toString().isEmpty())
+                            tmp.setName("Anonymous");
+                        else
                         tmp.setName(sb.toString());
                         scor.readScores();
                         scor.scores.add(tmp);
