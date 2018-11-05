@@ -2,6 +2,7 @@ package menu;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,5 +43,14 @@ public class Scores {
                 return p2.getPoints() - p1.getPoints();
             }
         });
+    }
+    
+     public void saveScores() throws FileNotFoundException, ParseException{
+        PrintWriter zapis = new PrintWriter("scoreboard.txt");
+        int size=scores.size();
+       for(int i=0; i<size; i++)
+           zapis.println(scores.get(i).toString());
+	  zapis.close();
+        
     }
 }
