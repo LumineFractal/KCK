@@ -23,11 +23,11 @@ public class Block {
     Screen screen;
     TextGraphics tg;
     Random rand = new Random();
-    int empty = 0;
+    static int empty = 0;
     
     public Block(Terminal m, Screen s, TextGraphics t){
         if(empty==0){
-            type = rand.nextInt(10) +1;
+            type = rand.nextInt(8) +1;
             empty++;
         }else{
             type=9;
@@ -42,7 +42,13 @@ public class Block {
     public void show() throws IOException{
         if(place==38){
             place=0;
-            type = rand.nextInt(12)+1;
+            if(empty==0){
+                type = 9;
+                empty++;
+            }else{
+                type = rand.nextInt(12)+1;
+                empty=0;
+            }
         }
         else{
             place+=2;
