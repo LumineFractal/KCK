@@ -47,10 +47,14 @@ public class Scores {
     
      public void saveScores() throws FileNotFoundException, ParseException{
         PrintWriter zapis = new PrintWriter("scoreboard.txt");
-        int size=scores.size();
-       for(int i=0; i<size; i++)
-           zapis.println(scores.get(i).toString());
-	  zapis.close();
+        int size = scores.size();
+        for(int i=0; i<size; i++){
+            if(i==size-1){
+                zapis.print(scores.get(i).toString());
+            }else
+                zapis.println(scores.get(i).toString());
+        }
+        zapis.close();
         
     }
 }

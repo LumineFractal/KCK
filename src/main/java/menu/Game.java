@@ -5,9 +5,15 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.Terminal;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -65,7 +71,7 @@ public class Game {
         showPosition(znak1);
     }
 
-    public void run() throws IOException, InterruptedException {
+    public void run() throws IOException, InterruptedException, FileNotFoundException, ParseException {
         while (gamerun) {
             screen.doResizeIfNecessary();
 
@@ -103,6 +109,10 @@ public class Game {
                 counter++;
             }
             blocksMove();
+            if(hp==0){
+                gameover();
+                gamerun=false;
+            }
         }
         screen.clear();
     }
@@ -215,5 +225,67 @@ public class Game {
         }
         tg.putString(4, 3, "Points: " + points);
         tg.putString(4, 5, "Combo: " + combo + "x   ");
+    }
+    
+    private void gameover() throws IOException, FileNotFoundException, ParseException, InterruptedException {
+        screen.clear();
+        tg.putString(34, 10, "GAME OVER");
+        tg.putString(34, 12, "Put your name here and press Enter: ");
+        tg.setForegroundColor(TextColor.ANSI.BLACK);
+        tg.setBackgroundColor(TextColor.ANSI.YELLOW);
+        tg.putString(36, 14, "                             ");
+        screen.refresh();
+        
+        //String name;
+        StringBuilder sb = new StringBuilder();
+        int index = 37;
+        Score tmp = new Score();
+        tmp.setPoints(points);
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df2 = new SimpleDateFormat("HH:mm:ss");
+        Date today = Calendar.getInstance().getTime();
+        Date today2 = Calendar.getInstance().getTime();
+        String date = df.format(today);
+        String date2 = df2.format(today2);
+        tmp.setDate(date);
+        tmp.setTime(date2);
+        
+        
+        Scores saving = new Scores();
+        boolean saverun = true;
+        sleep(250);
+        while(saverun){
+            KeyStroke keyPressed = terminal.pollInput();
+            
+            if (keyPressed != null) {
+                System.out.println(keyPressed);
+                switch (keyPressed.getKeyType()) {
+                    case Escape:
+                        tmp.setName("Anonymous");
+                        saving.readScores();
+                        saving.scores.add(tmp);
+                        saving.saveScores();
+                        saverun = false;
+                        break;
+                    case Enter:
+                        tmp.setName(sb.toString());
+                        saving.readScores();
+                        saving.scores.add(tmp);
+                        saving.saveScores();
+                        saverun = false;
+                        break;
+                    default:
+                        sb.append(keyPressed.getCharacter());
+                        tg.putString(index, 14, String.valueOf(keyPressed.getCharacter()));
+                        index++;
+                        screen.refresh();
+                        break;
+                }
+            }
+        }
+        tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+        tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+        screen.clear();
+        screen.refresh();
     }
 }
