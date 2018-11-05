@@ -10,6 +10,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -25,7 +26,7 @@ public class Block {
     Random rand = new Random();
     static int empty = 0;
     boolean[] full;
-    static boolean[] falsefull;
+    static boolean[] falsefull = new boolean[5];
     
     public Block(Terminal m, Screen s, TextGraphics t){
         if(empty==0){
@@ -121,7 +122,7 @@ public class Block {
                 type = rand.nextInt(8)+1;
                 empty=0;
             }
-            falsefull = full;
+            System.arraycopy(full, 0, falsefull, 0, 5);
             load();
         }
         else{

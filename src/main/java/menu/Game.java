@@ -155,7 +155,7 @@ public class Game {
     public void blocksMove() throws IOException{
         for (Block blok1 : bloki) {
             blok1.show();
-            if(blok1.place==38 && Block.falsefull!=null){
+            if(blok1.place==38){
                 checkCollisions();
             }
         }
@@ -220,10 +220,11 @@ public class Game {
         screen.refresh();
     }
 
-    private void checkCollisions() {
+    private void checkCollisions() throws IOException {
         if(Block.falsefull[position-1]==true){
             hp-=2;
-            System.out.println("Murzyny" + position);
+            tg.putString(68, 40, "Kolizja na pozycji " + position);
+            screen.refresh();
         }
     }
 }
