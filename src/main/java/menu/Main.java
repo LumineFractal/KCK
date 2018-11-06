@@ -38,7 +38,7 @@ public class Main {
         Music.playMenu(1);
         Music.setLevel(0.2);
         Effect.playEffect(3);
-        Effect.setLevel(0.2);
+        Effect.setLevel(0.5);
         menu1.first();  
         int choice = 0;
         

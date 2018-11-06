@@ -146,14 +146,16 @@ public class Menu {
         int choiceOptions = 0;
         boolean runO = true;
         int i = 0;
-        tg.putString(54, 16, "         SOUND VOLUME       ");
-        tg.putString(62, 28, "Music by Anamanaguchi");
-        tg.putString(62, 29, "License CC BY-NC-SA 3.0 US");
+        int ef = 0;
+        tg.putString(54, 16, "         SOUND SETTINGS     ");
+        tg.putString(62, 34, "Music by Anamanaguchi");
+        tg.putString(62, 35, "License CC BY-NC-SA 3.0 US");
         
         while(runO){
             KeyStroke keyOptions = terminal.pollInput();
             
-            if(choiceOptions == 0){
+            if(choiceOptions%3 == 0){
+                tg.putString(54, 29, "   ");
                 for(i = 0; i< Music.getLevel()*20; i+=2){
                     tg.putString(63+i, 18, "\u2588");
                 }
@@ -185,33 +187,100 @@ public class Menu {
                 tg.putString(61+i, 22, "|");
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
                 tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                //1
+                for(ef = 0; ef< Effect.getLevel()*20; ef+=2){
+                    tg.putString(63+ef, 25, "\u2588");
+                }
+                for(int j = ef; j<20; j+=2){
+                    tg.putString(63+j, 25, "_");
+                }
 
-                tg.putString(54, 25, "        BACK TO MENU       ");
+                for(int k = 0; k<ef; k++){
+                    tg.putString(61+k, 28, " ");
+                }
+                for(int l = ef; l<21; l++){
+                    tg.putString(61+l, 28, " ");
+                }
+                tg.setForegroundColor(TextColor.ANSI.BLACK);
+                tg.setBackgroundColor(TextColor.ANSI.WHITE);
+                tg.putString(61+ef, 28, "\u25B2");
+                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                for(int k = 0; k<ef; k++){
+                    tg.putString(61+k, 29, " ");
+                }
+                for(int l = ef; l<21; l++){
+                    tg.putString(61+l, 29, " ");
+                }
+                tg.setForegroundColor(TextColor.ANSI.BLACK);
+                tg.setBackgroundColor(TextColor.ANSI.WHITE);
+                tg.putString(61+ef, 29, "|");
+                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                tg.putString(40, 22, "MUSIC");
+                tg.putString(40, 29, "SOUND EFFECTS");
+                
+                tg.putString(54, 32, "        BACK TO MENU       ");
+                screen.refresh();
+            }else if(choiceOptions%3 == 1){
+                tg.putString(54, 22, "   ");
+                for(ef = 0; ef< Effect.getLevel()*20; ef+=2){
+                    tg.putString(63+ef, 25, "\u2588");
+                }
+                for(int j = ef; j<20; j+=2){
+                    tg.putString(63+j, 25, "_");
+                }
+
+                for(int k = 0; k<ef; k++){
+                    tg.putString(61+k, 28, " ");
+                }
+                for(int l = ef; l<21; l++){
+                    tg.putString(61+l, 28, " ");
+                }
+                tg.setForegroundColor(TextColor.ANSI.BLACK);
+                tg.setBackgroundColor(TextColor.ANSI.WHITE);
+                tg.putString(61+ef, 28, "\u25B2");
+                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+                for(int k = 0; k<ef; k++){
+                    tg.putString(61+k, 29, " ");
+                }
+                for(int l = ef; l<21; l++){
+                    tg.putString(61+l, 29, " ");
+                }
+                tg.setForegroundColor(TextColor.ANSI.BLACK);
+                tg.setBackgroundColor(TextColor.ANSI.YELLOW);
+                tg.putString(54, 29, "-->");
+                tg.setBackgroundColor(TextColor.ANSI.WHITE);
+                tg.putString(61+ef, 29, "|");
+                tg.setForegroundColor(TextColor.ANSI.DEFAULT);
+                tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
+
+                tg.putString(54, 32, "        BACK TO MENU       ");
                 screen.refresh();
             }else{
                 tg.putString(54, 22, "   ");
+                tg.putString(54, 29, "   ");
                 tg.setForegroundColor(TextColor.ANSI.BLACK);
                 tg.setBackgroundColor(TextColor.ANSI.YELLOW);
-                tg.putString(54, 25, "-->");
-                tg.putString(62, 25, "BACK TO MENU");
-                tg.putString(78, 25, "<--");
+                tg.putString(54, 32, "-->");
+                tg.putString(62, 32, "BACK TO MENU");
+                tg.putString(78, 32, "<--");
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
                 tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
                 screen.refresh();
             }
             if(keyOptions != null){
-                if(choiceOptions==1 && keyOptions.getKeyType()==Enter){
+                if(choiceOptions==2 && keyOptions.getKeyType()==Enter){
                     runO=false;
                 }
                 else{
-                    Effect.playEffect(3);
                     if(choiceOptions == 0){
                         switch(keyOptions.getKeyType()){
                         case ArrowLeft:
                             if(i>0){
                                 i-=2;
                                 Music.setLevel(i/20.00);
-                                Effect.setLevel(i/20.00);
                                 musicVolume = i/20.00;
                             }
                             break;
@@ -219,20 +288,60 @@ public class Menu {
                            if(i<20){
                                 i+=2;
                                 Music.setLevel(i/20.00);
-                                Effect.setLevel(i/20.00);
                                 musicVolume = i/20.00;
                             }
                             break;
                         case ArrowDown:
-                        case ArrowUp:
-                            if(choiceOptions==0){
-                                choiceOptions=1;
-                                break;
-                            }
+                            if(choiceOptions==0 || choiceOptions==1)
+                                choiceOptions++;
                             else{
                                 choiceOptions=0;
-                                break;
                             }
+                            break;
+                        case ArrowUp:
+                            if(choiceOptions==1 || choiceOptions==2)
+                                choiceOptions--;
+                            else{
+                                choiceOptions=2;
+                            }
+                            break;
+                        case Escape:
+                            runO=false;
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+                    else if(choiceOptions == 1){
+                        switch(keyOptions.getKeyType()){
+                        case ArrowLeft:
+                            if(ef>0){     
+                                Effect.playEffect(2);
+                                ef-=2;
+                                Effect.setLevel(ef/20.00);
+                            }
+                            break;
+                        case ArrowRight:
+                           if(ef<20){ 
+                                Effect.playEffect(2);
+                                ef+=2;
+                                Effect.setLevel(ef/20.00);
+                            }
+                            break;
+                        case ArrowDown:
+                            if(choiceOptions==0 || choiceOptions==1)
+                                choiceOptions++;
+                            else{
+                                choiceOptions=0;
+                            }
+                            break;
+                        case ArrowUp:
+                            if(choiceOptions==1 || choiceOptions==2)
+                                choiceOptions--;
+                            else{
+                                choiceOptions=2;
+                            }
+                            break;
                         case Escape:
                             runO=false;
                             break;
@@ -243,15 +352,19 @@ public class Menu {
                     else{
                         switch(keyOptions.getKeyType()){
                         case ArrowDown:
-                        case ArrowUp:
-                            if(choiceOptions==0){
-                                choiceOptions=1;
-                                break;
-                            }
+                            if(choiceOptions==0 || choiceOptions==1)
+                                choiceOptions++;
                             else{
                                 choiceOptions=0;
-                                break;
                             }
+                            break;
+                        case ArrowUp:
+                            if(choiceOptions==1 || choiceOptions==2)
+                                choiceOptions--;
+                            else{
+                                choiceOptions=2;
+                            }
+                            break;
                         case Escape:
                             runO=false;
                             break;
