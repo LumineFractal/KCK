@@ -155,7 +155,7 @@ public class Menu {
             KeyStroke keyOptions = terminal.pollInput();
             
             if(choiceOptions%3 == 0){
-                tg.putString(54, 29, "   ");
+                tg.putString(54, 25, "   ");
                 for(i = 0; i< Music.getLevel()*20; i+=2){
                     tg.putString(63+i, 18, "\u2588");
                 }
@@ -182,7 +182,7 @@ public class Menu {
                 }
                 tg.setForegroundColor(TextColor.ANSI.BLACK);
                 tg.setBackgroundColor(TextColor.ANSI.YELLOW);
-                tg.putString(54, 22, "-->");
+                tg.putString(54, 18, "-->");
                 tg.setBackgroundColor(TextColor.ANSI.WHITE);
                 tg.putString(61+i, 22, "|");
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
@@ -223,7 +223,7 @@ public class Menu {
                 tg.putString(54, 32, "        BACK TO MENU       ");
                 screen.refresh();
             }else if(choiceOptions%3 == 1){
-                tg.putString(54, 22, "   ");
+                tg.putString(54, 18, "   ");
                 for(ef = 0; ef< Effect.getLevel()*20; ef+=2){
                     tg.putString(63+ef, 25, "\u2588");
                 }
@@ -250,7 +250,7 @@ public class Menu {
                 }
                 tg.setForegroundColor(TextColor.ANSI.BLACK);
                 tg.setBackgroundColor(TextColor.ANSI.YELLOW);
-                tg.putString(54, 29, "-->");
+                tg.putString(54, 25, "-->");
                 tg.setBackgroundColor(TextColor.ANSI.WHITE);
                 tg.putString(61+ef, 29, "|");
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
@@ -259,8 +259,8 @@ public class Menu {
                 tg.putString(54, 32, "        BACK TO MENU       ");
                 screen.refresh();
             }else{
-                tg.putString(54, 22, "   ");
-                tg.putString(54, 29, "   ");
+                tg.putString(54, 18, "   ");
+                tg.putString(54, 25, "   ");
                 tg.setForegroundColor(TextColor.ANSI.BLACK);
                 tg.setBackgroundColor(TextColor.ANSI.YELLOW);
                 tg.putString(54, 32, "-->");
