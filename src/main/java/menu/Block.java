@@ -25,12 +25,13 @@ public class Block {
     TextGraphics tg;
     Random rand = new Random();
     static int empty = 0;
+    static int wheel = 0;
     boolean[] full;
     static boolean[] falsefull = new boolean[5];
     
     public Block(Terminal m, Screen s, TextGraphics t){
         if(empty==0){
-            type = rand.nextInt(8) +1;
+            type = 1;
             empty++;
         }else{
             type=9;
@@ -45,63 +46,43 @@ public class Block {
     }
     
     private void load(){
+        int current=0;
+        int row=0;
         switch(type){
             case 1:
-                full[0]=true;
-                full[1]=false;
-                full[2]=false;
-                full[3]=false;
-                full[4]=true;
-                break;
-            case 2:
-                full[0]=true;
-                full[1]=false;
-                full[2]=true;
-                full[3]=false;
-                full[4]=false;
-                break;
-            case 3:
-                full[0]=false;
-                full[1]=false;
-                full[2]=true;
-                full[3]=false;
-                full[4]=true;
-                break;
-            case 4:
-                full[0]=false;
-                full[1]=true;
-                full[2]=true;
-                full[3]=false;
-                full[4]=false;
-                break;
-            case 5:
-                full[0]=true;
-                full[1]=false;
-                full[2]=false;
-                full[3]=true;
-                full[4]=false;
-                break;
-            case 6:
-                full[0]=true;
-                full[1]=false;
-                full[2]=true;
-                full[3]=false;
-                full[4]=true;
-                break;
-            case 7:
-                full[0]=false;
-                full[1]=true;
-                full[2]=false;
-                full[3]=false;
-                full[4]=false;
-                break;
-            case 8:
-                full[0]=false;
-                full[1]=false;
-                full[2]=false;
-                full[3]=true;
-                full[4]=false;
-                break;
+                if(wheel==0){
+                    for(int i=4 ;i>=0; i--){
+                        if(current<3 && row<2){
+                            full[i]=rand.nextBoolean();
+                            if(full[i]==true){
+                                current++;
+                                row++;
+                            }
+                        }else{
+                            full[i]=false;
+                            row=0;
+                        }
+                    }
+                    wheel=1;
+                    break;
+                }
+                else{
+                    for(int i=0 ;i<5; i++){
+                        if(current<3 && row<2){
+                            full[i]=rand.nextBoolean();
+                            if(full[i]==true){
+                                current++;
+                                row++;
+                            }
+                        }else{
+                            full[i]=false;
+                            row=0;
+                        }
+                    }
+                    wheel=0;
+                    break;
+                }
+                
             default:
                 full[0]=false;
                 full[1]=false;
@@ -119,7 +100,7 @@ public class Block {
                 type = 9;
                 empty++;
             }else{
-                type = rand.nextInt(8)+1;
+                type = 1;
                 empty=0;
             }
             System.arraycopy(full, 0, falsefull, 0, 5);

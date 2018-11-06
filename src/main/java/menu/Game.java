@@ -87,6 +87,7 @@ public class Game {
                     System.out.println(keyPressed);
                     switch (keyPressed.getKeyType()) {
                         case Escape:
+                            Music.stop();
                             gamerun = false;
                             break;
                         case ArrowLeft:

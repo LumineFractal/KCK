@@ -368,7 +368,7 @@ public class Menu {
                                 show();
                                 break;
                             case 2:
-                                game = new Game(terminal, screen, tg, this.scoresM, 45);
+                                game = new Game(terminal, screen, tg, this.scoresM, 40);
                                 game.init();
                                 Music.stop();
                                 Music.playMenu(2);
