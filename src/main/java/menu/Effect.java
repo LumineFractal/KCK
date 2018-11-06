@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package menu;
 
 import java.io.File;
@@ -18,12 +13,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  * @author Kaveri
  */
-
-class Music {
+class Effect {
     private static Clip clip;
     private static double level = 1;
-    
-    static void playMenu(int choose) {
+
+    static void playEffect(int choose){
         try {
             clip = AudioSystem.getClip();
         } catch (LineUnavailableException e) {
@@ -31,21 +25,25 @@ class Music {
         }
         try {
             if(choose == 1){
-                clip.open(AudioSystem.getAudioInputStream(new File("FloraFauna.wav")));
-            }else{
-                clip.open(AudioSystem.getAudioInputStream(new File("HelixNebula.wav")));
+                clip.open(AudioSystem.getAudioInputStream(new File("gameover.wav")));
+                clip.loop(100);
+            }else if(choose == 3){
+                clip.open(AudioSystem.getAudioInputStream(new File("empty.wav")));
             }
+            else{
+                clip.open(AudioSystem.getAudioInputStream(new File("collision.wav")));
+            }
+            
         } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
-        clip.loop(100);
-        clip.setMicrosecondPosition(1500000);
+        clip.setMicrosecondPosition(1);
         clip.start();
     }
 
     static void setLevel(double slevel) {
         level = slevel;
-        Music.setVolume();
+        Effect.setVolume();
     }
 
     static double getLevel() {

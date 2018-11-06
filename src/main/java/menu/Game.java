@@ -113,6 +113,7 @@ public class Game {
             }
             blocksMove();
             if(hp==0){
+                Music.stop();
                 gameover();
                 gamerun=false;
             }
@@ -206,9 +207,12 @@ public class Game {
             tg.putString(68, 40, "Kolizja na pozycji " + position);
 
             // screen.refresh();
+            Effect.playEffect(2);
+            Effect.setLevel(Effect.getLevel());
             showPosition(znak2);
             sleep(200);
             showPosition(znak1);
+            Effect.stop();
         }
         combo++;
         points = points + combo;
@@ -232,6 +236,8 @@ public class Game {
     
     private void gameover() throws IOException, FileNotFoundException, ParseException, InterruptedException {
         screen.clear();
+        Effect.playEffect(1);
+        Effect.setLevel(Effect.getLevel());
         tg.putString(34, 12, "Put your name here and press Enter: ");
         tg.setForegroundColor(TextColor.ANSI.BLACK);
         tg.setBackgroundColor(TextColor.ANSI.YELLOW);
@@ -344,6 +350,7 @@ public class Game {
             tg.setBackgroundColor(TextColor.ANSI.YELLOW);
             screen.refresh();
         }
+        Effect.stop();
         tg.setForegroundColor(TextColor.ANSI.DEFAULT);
         tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
         screen.clear();

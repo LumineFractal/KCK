@@ -204,12 +204,14 @@ public class Menu {
                     runO=false;
                 }
                 else{
+                    Effect.playEffect(3);
                     if(choiceOptions == 0){
                         switch(keyOptions.getKeyType()){
                         case ArrowLeft:
                             if(i>0){
                                 i-=2;
                                 Music.setLevel(i/20.00);
+                                Effect.setLevel(i/20.00);
                                 musicVolume = i/20.00;
                             }
                             break;
@@ -217,6 +219,7 @@ public class Menu {
                            if(i<20){
                                 i+=2;
                                 Music.setLevel(i/20.00);
+                                Effect.setLevel(i/20.00);
                                 musicVolume = i/20.00;
                             }
                             break;
@@ -349,7 +352,6 @@ public class Menu {
                                 Music.playMenu(2);
                                 Music.setLevel(getMusicVolume());
                                 game.run();
-                                Music.stop();
                                 Music.playMenu(1);
                                 Music.setLevel(getMusicVolume());
                                 show();
@@ -361,7 +363,6 @@ public class Menu {
                                 Music.playMenu(2);
                                 Music.setLevel(getMusicVolume());
                                 game.run();
-                                Music.stop();
                                 Music.playMenu(1);
                                 Music.setLevel(getMusicVolume());
                                 show();
@@ -373,7 +374,6 @@ public class Menu {
                                 Music.playMenu(2);
                                 Music.setLevel(getMusicVolume());
                                 game.run();
-                                Music.stop();
                                 Music.playMenu(1);
                                 Music.setLevel(getMusicVolume());
                                 show();

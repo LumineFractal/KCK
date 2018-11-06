@@ -37,12 +37,12 @@ public class Main {
         menu1.show();
         Music.playMenu(1);
         Music.setLevel(0.2);
+        Effect.playEffect(3);
+        Effect.setLevel(0.2);
         menu1.first();  
         int choice = 0;
         
         boolean running = true;
-        StringBuilder sb = new StringBuilder();
-        Game game;
         
         screen.doResizeIfNecessary();
         while(running){
