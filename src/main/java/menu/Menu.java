@@ -217,8 +217,8 @@ public class Menu {
                 tg.putString(61+ef, 29, "|");
                 tg.setForegroundColor(TextColor.ANSI.DEFAULT);
                 tg.setBackgroundColor(TextColor.ANSI.DEFAULT);
-                tg.putString(40, 22, "MUSIC");
-                tg.putString(40, 29, "SOUND EFFECTS");
+                tg.putString(40, 18, "MUSIC");
+                tg.putString(40, 25, "SOUND EFFECTS");
                 
                 tg.putString(54, 32, "        BACK TO MENU       ");
                 screen.refresh();
