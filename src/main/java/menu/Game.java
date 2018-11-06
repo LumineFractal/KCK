@@ -204,10 +204,7 @@ public class Game {
             for (int k = 8 + hp; k < 28; k++) {
                 tg.putString(k, 1, " ");
             }
-            tg.setForegroundColor(TextColor.ANSI.DEFAULT);
-            tg.putString(68, 40, "Kolizja na pozycji " + position);
-
-            // screen.refresh();
+       
             Effect.playEffect(2);
             Effect.setLevel(Effect.getLevel());
             showPosition(znak2);
